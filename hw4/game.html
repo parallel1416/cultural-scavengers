@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        var x=0;
+        var y=0;
+        var dx=1;
+        var dy=1;
+        var kx=0;
+        var ky=5;
+        var gx=2;
+        var gy=3;
+        var gameState=0;
+        const wallsVertical = 
+            [[1, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 1, 0, 0, 1],
+            [1, 0, 0, 1, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 1]];
+        const wallsHorizontal = 
+            [[1, 1, 1, 1, 1, 1],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 1, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [1, 1, 1, 1, 1, 1]];
+        function stepDown() {
+            if (gameState != 0) return;
+            if (dx!=x+1||dy!=y) {
+                if (wallsHorizontal[x+1][y]==0) x++;
+            }
+            else {
+                if (wallsHorizontal[x + 1][y] == 0 && wallsHorizontal[x + 2][y] == 0 && (dx != kx - 1 || dy != ky)){
+                    x++;
+                    dx++;
+                }
+            }
+            stepGhost();
+            render();
+        }
+        function stepUp() {
+            if (gameState != 0) return;
+            if (dx != x - 1 || dy != y) {
+                if (wallsHorizontal[x][y] == 0) x--;
+            }
+            else {
+                if (wallsHorizontal[x][y] == 0 && wallsHorizontal[x -1][y] == 0 && (dx != kx + 1 || dy != ky)) {
+                    x--;
+                    dx--;
+                }
+            }
+            stepGhost();
+            render();
+        }
+        function stepRight() {
+            if (gameState != 0) return;
+            if (dy != y + 1 || dx != x) {
+                if (wallsVertical[x][y+1] == 0) y++;
+            }
+            else {
+                if (wallsVertical[x][y+1] == 0 && wallsVertical[x][y + 2] == 0 && (dx != kx || dy != ky - 1)) {
+                    y++;
+                    dy++;
+                }
+            }
+            stepGhost();
+            render();
+        }
+        function stepLeft() {
+            if (gameState!=0) return;
+            if (dy != y - 1 || dx != x) {
+                if (wallsVertical[x][y] == 0) y--;
+            }
+            else {
+                if (wallsVertical[x][y] == 0 && wallsVertical[x][y -1] == 0 && (dx != kx || dy != ky + 1)) {
+                    y--;
+                    dy--;
+                }
+            }
+            stepGhost();
+            render();
+        }
+        function stepGhost() {
+            if (gameState != 0) return;
+            if (y<ky) {
+                if (wallsVertical[kx][ky] == 0 && (dx != kx || dy != ky -1)) {ky--;return;}
+            }
+            if (y>ky) {
+                if (wallsVertical[kx][ky+1] == 0 && (dx != kx || dy != ky+1)) { ky++; return; }
+            }
+            if (x<kx) {
+                if (wallsHorizontal[kx][ky] == 0 && (dx != kx-1 || dy != ky)) kx--;
+            }
+            if (x>kx) {
+                if (wallsHorizontal[kx+1][ky] == 0 && (dx != kx+1 || dy != ky)) kx++;
+            }
+        }
+        function render() {
+            for (let i = 0; i < 36; i++) {
+                document.getElementById("game").children.item(i).innerHTML ='';
+            }
+            document.getElementById("game").children.item(gx * 6 + gy).innerHTML = '<img src="star.svg" class="icon">';
+            document.getElementById("game").children.item(x * 6 + y).innerHTML='<img src="person.svg" class="icon">';
+            document.getElementById("game").children.item(kx * 6 + ky).innerHTML = '<img src="danger.svg" class="icon">';
+            document.getElementById("game").children.item(dx * 6 + dy).innerHTML = '<img src="box.svg" class="icon">';
+            for (let i = 0; i < 6; i++) {
+                for (let j = 0; j < 6; j++){
+                    if (wallsVertical[i][j] == 1) {
+                        document.getElementById("game").children.item(i * 6 + j).style.borderLeft='3px solid black';
+                    }
+                    if (wallsHorizontal[i][j] == 1) {
+                        document.getElementById("game").children.item(i * 6 + j).style.borderTop = '3px solid black';
+                    }
+                }
+            }
+            for (let i = 0; i < 6; i++) {
+                document.getElementById("game").children.item(i * 6 + 5).style.borderRight = '3px solid black';
+                document.getElementById("game").children.item(30 + i).style.borderBottom = '3px solid black';
+            }
+            if (dx == gx && dy == gy) {
+                document.getElementById("demo").innerHTML ='YOU WIN!';
+                gameState=1;
+            }
+            if (x == kx && y == ky) {
+                document.getElementById("demo").innerHTML = 'YOU LOSE!';
+                gameState = -1;
+            }
+        }
+        function reset(){
+            x = 0;
+            y = 0;
+            dx = 1;
+            dy = 1;
+            kx = 0;
+            ky = 5;
+            gx = 2;
+            gy = 3;
+            gameState=0;
+            document.getElementById("demo").innerHTML = '<b>PUSH</b> THE BOX. &nbsp;<b>REACH</b> THE STAR. &nbsp;<b>AVOID</b> THE GHOST.';
+            render();
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 10%;
+            text-align: center;
+        }
+        img {
+            position: absolute;
+            margin: 0;
+            width:40px;
+            height:40px;
+        }
+        .icon {
+            transform: translate(-50%, 10%);
+        }
+        img:hover {
+            transform: scale(1.03);
+            border: 1px solid #858585;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        .center {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            display: block;
+            padding: 0;
+            margin: auto;
+        }
+        #game {
+            width: 360px;
+            height: 360px;
+            display: grid;
+            grid-template-columns: auto auto auto auto auto auto;
+        }
+        .grid-item {
+            text-align: center;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            padding: 5px;
+        }
+        #button {
+            font-weight: bold;
+            border: 2px solid black;
+            border-radius: 5px;
+            width: 80px;
+            height: unset;
+            padding: 5px;
+            font-size: large;
+        }
+        #button:hover {
+            transform: scale(1.03);
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body onload="render()">
+    <div class="center" id='game'>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item">6</div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item">6</div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item">6</div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item">6</div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item">6</div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item">6</div>
+    </div>
+    <p id="demo"><b>PUSH</b> THE BOX. &nbsp;<b>REACH</b> THE STAR. &nbsp;<b>AVOID</b> THE GHOST.</p>
+    <div id="button" class="center" onclick="reset()">RESET</div>
+    <br>
+    <div class="center">
+        <img src="down.svg" alt="Down" onclick="stepDown()"
+        style="bottom: 0; left: 40px;">
+        <img src="up.svg" alt="Up" onclick="stepUp()"
+        style="top: 0; left: 40px;">
+        <img src="left.svg" alt="Left" onclick="stepLeft()"
+        style="left: 0; top: 40px;">
+        <img src="right.svg" alt="Right" onclick="stepRight()"
+        style="right: 0; top: 40px;">
+    </div>
+
+</body>
+
+</html>

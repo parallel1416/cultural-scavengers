@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>stars</title>
+<style>
+	body{
+		
+		background-color: #000000;
+		color: rgb(229, 229, 229);
+		margin-bottom: 5%;
+		font-size: 120%;
+		}
+	p{
+		font-family: 'STHeiti Light','PMingLiU','MingLiU','新宋体', 'NSimSun', '宋体', 'SimSun';
+		margin: 0% 10% 3% 10%;
+		line-height: 1.5;
+		font-size: 105%;
+		transition: all 0.3s ease;
+	}
+	p:hover{
+		color: white;
+	}
+	.ask{
+		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		text-emphasis: bold;
+		font-size: 150%;
+		margin: 4% 10% 4% 10%;
+		transition: all 0.5s ease;
+	}
+	.ask::before{
+	    content: url('message.png');
+	    margin-right: 10px;
+	    vertical-align: middle;
+  		width: 15px;
+  		height: 15px;
+	}
+	.ask:hover{
+		color: aqua;
+	}
+	.quote{
+		width: 20%;
+		text-wrap: wrap;
+		float: right;
+		margin: 4%;
+		margin-right: 10%;
+		font-size: 120%;
+		color: aqua;
+		font-weight: 550;
+		font-family: 'Microsoft YaHei', '微软雅黑', sans-serif;
+		transition: all 0.3s ease;
+	}
+	.quote:hover{
+	    transform: scale(1.1);
+	}
+	.icon{
+		margin: 6% 0% 0% 0%;
+	}
+	.emphasis{
+		font-weight: 550;
+		color: aqua;
+		transition: all 0.s ease;
+		display: inline-block;
+	}
+	.emphasis:hover{
+	    font-weight: bold;
+	}
+	.last::after{
+		content: url('pencil.png');
+	    vertical-align: text-top;
+	}
+	.foreword{
+		border-top: 2px solid rgb(198, 198, 198);
+		margin: 5% 10% 5% 10%;
+		padding: 5%;
+		background-color: #202020;
+		font-family:'Ariel', sans-serif;
+		transition: all 0.3s ease;
+	}
+	.foreword:hover{
+	    border-top: 2px solid white;
+	}
+
+</style>
+</head>
+
+<body>
+<br>
+<br>
+<img src="stars.jpeg" alt="s" width="100%">
+<img src="ppl.jpg" alt="s" width="100%" style="margin-bottom: 10%;border-bottom: 10px solid aqua;">
+	<br>
+<h1 style="text-align: center;">星</h1>
+<h3 style="text-align: center; font-weight: 400;"> —— 一篇对高三学生的采访</h2>
+<div class="foreword">
+	<p style="font-family: unset;">作者寄语：</p>
+	<p style="font-family: unset;">这是我在高三时期对身边同学进行的真实采访的一部分。当时还把它做成了网页，但是没有用CSS，可谓没有技巧，全是感情（笑）。</p>
+	<p style="margin-bottom: 0%;font-family: unset;">现在把它当作js与web的作业重新制作，权当对那段时光的美好回忆。</p>
+</div>
+	<p class="ask">你对未来的方向有什么规划？</p>
+<div class="quote">
+	<img src="q1.png" alt="s" width="10%" class="icon"><p></p>
+	<div style="text-align: center;">最高目标是拿个诺奖。</div>
+	<div style="text-align: right;"><img src="q2.png" alt="s" width="10%" class="icon"></div>
+</div>
+<p>“如果只顾近忧不顾远虑的话，我本科可能会学一些<span class="emphasis">数学、物理</span>这种偏基础的东西。现在之所以从事基础是为了能够在学习的过程中探索这个世界比较本源的东西，同时也能够为自己在研究生这个阶段找到对应的一些可以延伸的发展方向。而且现在国际形势感觉并不是很稳定，国际的强力也越来越强，本科如果读金融或者计算机这种目前看上去类似于铁饭碗赚钱快的东西，到那个时候也可能安危不保。而且比较基础的知识能够在更广泛的情况下转化成生产力。虽然目前我的思想比较务实，希望能够学一些经世致用的东西，但是具体要做些什么的话，还是希望到新的阶段再做打算。”</p>
+
+	<p>“对于人生的话，其实我目前的规划是十分模糊的，因为我的兴趣十分地广泛，然后我的一些，才能也十分地广泛，然后就不知道到底该学什么，甚至前几天我在选专业的时候，我突然觉得我什么专业都不想去。总之是比较模糊。但是我一方面希望可以去开拓一些新东西，去做一些有<span class="emphasis">创造性</span>的工作，另一方面也想做一些比较实用的工作，为这个世界做点贡献。”</p>
+
+	<p>“方向很明确，我就是想搞科研，去<span class="emphasis">研发药物</span>。大概是从高一决定选科的时候就想好了。专业就是选哪个能让我去读制药我就去读哪个。不遗余力地去往这条路上走。就这样。我其实没怎么考虑过赚钱的问题。关于这条路，当然最高目标就是拿个诺奖。”</p>
+
+<p>“就读专业是<span class="emphasis">临床医学或者口腔医学</span>。职业规划是去做医生或者是医药咨询或者是互联网医药。如果做医生的话，大概8年临床读完，出来在大城市做2~3年，可能3~5年，然后回家去做主治或者什么再说。如果做医药咨询的话，可能就会定居在大城市。互联网医药是没有具体了解，不过如果要做富婆的话，还是要去搞医药咨询。”</p>
+<p class="ask">你一直以来相信的是什么？</p>
+<div class="quote">
+	<img src="q1.png" alt="s" width="10%" class="icon"><p></p>
+	<div style="text-align: center;">我需要为尽可能多的人类福祉而奋斗。</div>
+	<div style="text-align: right;"><img src="q2.png" alt="s" width="10%" class="icon"></div>
+</div>
+	<p>“人类的科技发展是建立在不断打破原有的道德观念的基础上的。科技发展到一定阶段，原有的道德观念就会消亡。可以举这么一个例子，人们不管是建立道德还是建立法律，这里姑且称为<span class="emphasis">礼和法</span>，最终的目的都是为了利。利的范围是很广泛的，它包括经济利益，也包括一些不能浅层地归于经济利益的利益。如果取利过度了，必然会以不正当的方式取利，招致人们的反对，使得取利的过程不能再进行下去。所以取利必须要找到一个借口，或者说节制，叫做<span class="emphasis">义</span>。这个义就是我所指的礼和法。众所周知，不管是生产力还是信息，它随着时代的嬗变是指数级增长的，这就是为什么礼和法都会随着时代的变化而不断地更新。”</p>
+
+	<p>“我选择去相信<span class="emphasis">存在真理</span>，至少从狭义的科学的层面来说。但是其实我一直会有一种活在套子里的感觉。比如形象地说，是卞之琳那首诗，你站在桥上看风景，看风景的人在楼上看你。对于每个人来说，你可能看到别人觉得他很局限，但其实你也只是局限在你自己的壳里。”</p>
+
+	<p class="last">“我觉得我需要为尽可能多的<span class="emphasis">人类福祉</span>而奋斗。”</p>
+	
+	<div style="text-align: center;"><img src="star.webp" alt="" width="30%"></div>
+
+
+</body>
+</html>

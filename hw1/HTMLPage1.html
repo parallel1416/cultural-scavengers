@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body{
+            font-family: arial, sans-serif;
+            margin-top: 10%;
+            background-image: url("bkgrd.jpg");
+            background-attachment: fixed;
+            background-repeat:space;
+        }
+        .div_colored{
+            background-color: rgba(150, 212, 212, 1);
+            color:white;
+            width: 100%;
+        }
+        a {
+            text-decoration: none;
+            color: unset;
+        }
+        table {
+            border: 2px double #dddddd;
+            border-radius: 10px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 2px double #dddddd;
+            text-align: left;
+            padding: 8px;
+            width: 20%;
+        }
+
+        tr:nth-child(5),tr:nth-child(7),tr:nth-child(9){
+            background-color: rgba(150, 212, 212, 0.4);
+        }
+
+        .head-center {
+            text-align: center;
+            color: rgb(123, 188, 188);
+            font-size: 350%;
+        }
+        .head-left {
+            margin: 10%;
+            margin-bottom: 0%;
+        }
+
+        #mytable {
+            color: orange;
+            border: 1;
+            
+        }
+        .table-container{
+            margin: 10%;
+            color: orange;
+        }
+        ul{
+            margin: 10%;
+            margin-top: 5%;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .title{
+            font-size: 120%;
+        }
+        p{
+            font-size: 120%;}
+    </style>
+</head>
+<body>
+    <a name="top"></a>
+    <h1 class="head-center">Curriculum Vitae</h1>
+    <div class="main-container">
+        <div class="table-container">
+            <table id="mytable">
+                <tr class="title">
+                    <th colspan="3" style="background-color: rgba(150, 212, 212, 0.4);">Name</th>
+                    <th rowspan="4">
+                        <img src="profile.png" alt="profile" style="float: right;padding-right: 20px;height: 300px;">
+                    </th>
+                </tr>
+                <tr class="title"><td colspan="3">X</td></tr>
+                <tr class="title">
+                    <th colspan="3" style="background-color: rgba(150, 212, 212, 0.4);">Institution</th>
+                </tr>
+                <tr class="title">
+                    <td colspan="3">Peking University</td>
+                </tr>
+                <tr>
+                    <th>Contact</th>
+                    <td>xxx@pku.edu.cn</td>
+                    <th>Address</th>
+                    <td>Beijing, China</td>
+                </tr>
+                <tr>
+                    <th>Research Interests</th>
+                    <td colspan="3">Computer Science</td>
+                </tr>
+                <tr>
+                    <th>Education</th>
+                    <td colspan="3">Bachelor of Computer Science and Technology, Peking University, 2017-2021</td>
+                </tr>
+                <tr>
+                    <th>Awards</th>
+                    <td colspan="3">National Scholarship (2020)</td>
+                </tr>
+                <tr>
+                    <th>Skills</th>
+                    <td colspan="3">Programming Languages: Java (Advanced), Python (Advanced), C (Intermediate), C# (Intermediate), C++ (Beginner)
+                    </p><p>Operating Systems: Windows XP/Vista/7/8/10, Linux</p>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    <div class="div_colored">
+        <br>
+        <h1 class="head-left">My academic projects</h1>
+        <ul>
+            <li><h2>Camera Keyframing with Style and Control</h2></li>
+            <p>Accepted in SIGGRAPH Asia 2021 &nbsp;&nbsp;&nbsp;<a href="https://jianghd1996.github.io/publication/siga_2021/"><b>Project page</b></a></p>
+            <img src="pub1.png" alt="" style="width: 80%;">
+            <p>Project Video:</p>
+            <iframe width="80%" height="300" src="https://www.youtube.com/embed/oTwkhVfOcKw">
+            </iframe>
+            <li><h2>Magnectic Control in Physical Simulation</h2></li>
+            <p>Accepted in SIGGRAPH 2024 &nbsp;&nbsp;&nbsp;<a
+                    href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley"><b>Project page</b></a></p>
+            <img src="pub2.png" alt="" style="width: 80%;">
+            <p>Project Video:</p>
+            <iframe width="80%" height="300" src="https://www.youtube.com/embed/YF0dFnY9K5w">
+            </iframe>
+        </ul>
+        <br>
+    </div>
+    <div class="table-container">
+        <h1 style="color: rgba(150, 212, 212, 1);">More...</h1>
+        <p>Visit me at <a href="https://www.pku.edu.cn/"><b>my website</b></a>, 
+            or check out <a href="https://twitter.com/home"><b>my twitter</b></a>!</p>
+        <br>
+        <br>
+        <br>
+            <p style="text-align: end; text-decoration: none; "><small><a href="#top">back to top</a></small></p>
+    </div>
+    </div>
+</body>
+</html>
+
