@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style>
+        body {
+            font-family: 'Trebuchet MS',  Geneva, Verdana, sans-serif;
+            font-weight: bold;
+            background-image: url(dnd.jpg);
+            background-size: contain;
+            margin: 5% 20% 5% 20%;
+            background-color: black;
+            color: #dcdcdc;
+        }
+        .error {
+            color: #FF0000;
+        }
+        header, footer {
+            text-align: center;
+            color: #ffda73;
+            margin: 30px;
+        }
+        section{
+            display: -webkit-flex;
+            display: flex;
+        }
+        article {
+            width: 50%;
+            padding: 10px;
+        }
+        article p{
+            margin: 0;
+        }
+        aside {
+            width: 50%;
+            border: 2px groove rgb(180, 178, 178);
+            border-radius: 5px;
+            text-align: center;
+            padding: 10px;
+            max-height: 80%;
+        }
+        input, textarea, select{
+            margin: 10px 0;
+            width: 90%;
+            padding: 10px;
+            transition: all 0.4s ease-in-out;
+            border-radius: 3px;
+            font-weight: inherit;
+            font-family: inherit;
+            resize: none;
+        }
+        input:focus, textarea:focus, select:focus{
+            border: 2px solid #ffda73;
+        }
+        select{
+            width: unset;
+        }
+        input[type=radio] {
+            cursor: pointer;
+            width: unset;
+        }
+        input[type=checkbox] {
+            cursor: pointer;
+            width: unset;
+        }
+        input[type=number]{
+            width: 60px;
+        }
+        input[type=submit] {
+            width: 50%;
+            background-color: #e49404;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: larger;
+        }
+
+        input[type=submit]:hover {
+            background-color: #ffda73;
+        }
+        footer{
+            padding: 30px;
+        }
+        img {
+            bottom: 0px;
+            position: relative;
+            max-height: 400px;
+        }
+        .slidecontainer {
+            width: 90%;
+            border: 2px groove black;
+            padding: 10px;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 60%;
+            height: 15px;
+            border-radius: 5px;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+            padding: 0;
+        }
+
+        .slider:hover {
+            opacity: 1;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #e49404;
+            cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #e49404;
+            cursor: pointer;
+        }
+        #display2{
+            position: absolute;
+            top: 60px;
+            left: 50%;
+        }
+
+    </style>
+    <script>
+        function validateForm() {
+            var flag = true;
+            var x = document.forms["myForm"]["name"].value;
+            if (x == "") {
+                document.getElementById("nameErr").innerHTML = "Name is required";
+                flag = false;
+            }
+            x = document.forms["myForm"]["gender"].value;
+            if (x == "") {
+                document.getElementById("genderErr").innerHTML = "Gender is required";
+                flag = false;
+            }
+            x = document.forms["myForm"]["terms"].value;
+            if (x == "no") {
+                document.getElementById("termsErr").innerHTML = "Please accept the terms and conditions.";
+                flag = false;
+            }
+            if (flag){
+                document.forms["myForm"].requestSubmit();
+            }
+        }
+        function updateName(){
+            var x = document.forms["myForm"]["name"].value;
+            document.getElementById("nameErr").innerHTML = "";
+            document.getElementById("displayName").innerHTML = x;
+        }
+        function updateGender(){
+            document.getElementById("genderErr").innerHTML = "";
+            updateSpecies();
+        }
+        function updateTerms(){
+            var x = document.forms["myForm"]["terms"].value;
+            if (x == "no") {
+                document.forms["myForm"]["terms"].value = "yes";
+            }
+            else {
+                document.forms["myForm"]["terms"].value = "no";
+            }
+            document.getElementById("termsErr").innerHTML = "";
+        }
+        function updateSpecies() {
+            var x="Human";
+            x = document.forms["myForm"]["species"].value;
+            var y = document.forms["myForm"]["gender"].value;
+            if (x == "Human") {
+                if (y == "female") document.getElementById("display").innerHTML = "<img src='humanf.png' alt='Human Female'>";
+                else if (y == "male") document.getElementById("display").innerHTML = "<img src='humanm.png' alt='Human Male'>";
+                document.getElementById("prof").innerHTML = "Priest";
+                document.getElementById("atk").min="1";
+                document.getElementById("atkmin").innerHTML = "1";
+                document.getElementById("atk").max = "10";
+                document.getElementById("atkmax").innerHTML = "10";
+                document.getElementById("def").min = "1";
+                document.getElementById("defmin").innerHTML = "1";
+                document.getElementById("def").max = "10";
+                document.getElementById("defmax").innerHTML = "10";
+                document.getElementById("mag").min = "3";
+                document.getElementById("magmin").innerHTML = "3";
+                document.getElementById("mag").max = "11";
+                document.getElementById("magmax").innerHTML = "11";
+                document.getElementById("hel").min = "2";
+                document.getElementById("helmin").innerHTML = "2";
+                document.getElementById("hel").max = "10";
+                document.getElementById("helmax").innerHTML = "10";
+            }
+            else if (x == "Elf") {
+                if (y == "female") document.getElementById("display").innerHTML = "<img src='elff.png' alt='Elf Female'>";
+                else if (y == "male") document.getElementById("display").innerHTML = "<img src='elfm.png' alt='Elf Male'>";
+                document.getElementById("prof").innerHTML = "Priest";
+                document.getElementById("atk").min = "1";
+                document.getElementById("atkmin").innerHTML = "1";
+                document.getElementById("atk").max = "10";
+                document.getElementById("atkmax").innerHTML = "10";
+                document.getElementById("def").min = "1";
+                document.getElementById("defmin").innerHTML = "1";
+                document.getElementById("def").max = "6";
+                document.getElementById("defmax").innerHTML = "6";
+                document.getElementById("mag").min = "5";
+                document.getElementById("magmin").innerHTML = "5";
+                document.getElementById("mag").max = "20";
+                document.getElementById("magmax").innerHTML = "20";
+                document.getElementById("hel").min = "3";
+                document.getElementById("helmin").innerHTML = "3";
+                document.getElementById("hel").max = "9";
+                document.getElementById("helmax").innerHTML = "9";
+            }
+            else if (x == "Orc") {
+                if (y == "female") document.getElementById("display").innerHTML = "<img src='orcf.png' alt='Orc Female'>";
+                else if (y == "male") document.getElementById("display").innerHTML = "<img src='orcm.png' alt='Orc Male'>";
+                document.getElementById("prof").innerHTML = "Rogue";
+                document.getElementById("atk").max = "12";
+                document.getElementById("atkmax").innerHTML = "12";
+                document.getElementById("atk").min = "3";
+                document.getElementById("atkmin").innerHTML = "3";
+                document.getElementById("def").min = "5";
+                document.getElementById("defmin").innerHTML = "5";
+                document.getElementById("def").max = "16";
+                document.getElementById("defmax").innerHTML = "16";
+                document.getElementById("mag").min = "1";
+                document.getElementById("magmin").innerHTML = "1";
+                document.getElementById("mag").max = "5";
+                document.getElementById("magmax").innerHTML = "5";
+                document.getElementById("hel").min = "4";
+                document.getElementById("helmin").innerHTML = "4";
+                document.getElementById("hel").max = "14";
+                document.getElementById("helmax").innerHTML = "14";
+            }
+            else if (x == "Dwarf") {
+                if (y == "female") document.getElementById("display").innerHTML = "<img src='dwarff.png' alt='Dwarf Female' height=280px>";
+                else if (y == "male") document.getElementById("display").innerHTML = "<img src='dwarfm.png' alt='Dwarf Male' height=300px>";
+                document.getElementById("prof").innerHTML = "Rogue";
+                document.getElementById("atk").min = "2";
+                document.getElementById("atkmin").innerHTML = "2";
+                document.getElementById("atk").max = "16";
+                document.getElementById("atkmax").innerHTML = "16";
+                document.getElementById("def").min = "4";
+                document.getElementById("defmin").innerHTML = "4";
+                document.getElementById("def").max = "12";
+                document.getElementById("defmax").innerHTML = "12";
+                document.getElementById("mag").min = "1";
+                document.getElementById("magmin").innerHTML = "1";
+                document.getElementById("mag").max = "12";
+                document.getElementById("magmax").innerHTML = "12";
+                document.getElementById("hel").min = "3";
+                document.getElementById("helmin").innerHTML = "3";
+                document.getElementById("hel").max = "8";
+                document.getElementById("helmax").innerHTML = "8";
+            }
+            updateProf();
+        }
+        function updateProf() {
+            var x = document.forms["myForm"]["profession"].value;
+            console.log(x);
+            var y = document.getElementById("display2");
+            if (document.getElementById("display").innerHTML == "") return;
+            if (x == "Warrior") {
+                y.innerHTML = "<img src='shield.png' style='width: 70%; top:240px; left:80px;'>";
+            }
+            if (x == "Mage") {
+                y.innerHTML = "<img src='mage.png' style='width: 60%; top:200px; left:80px;'>";
+            }
+            if (x == "Priest") {
+                if (document.getElementById("prof").innerHTML=="Rogue") y.innerHTML = "<img src='rogue.png' style='width: 60%; top:200px; left:60px; z-index:-1;' >";
+                else y.innerHTML = "<img src='priest.png' style='width: 95%; top:220px; left:100px;'>";
+            }
+        }
+    </script>
+    
+</head>
+<body onload="updateSpecies();updateProf();">
+
+<header><h1>Create Your Role!</h1></header>
+<section>
+<article>
+    <form action="https://postman-echo.com/post" method="post" name="myForm">
+    <p>Name: </p><input type="text" name="name" value="" oninput="updateName()">
+    <span class="error" id="nameErr"></span>
+    <br>
+    <label for="age">Age: </label><input type="number" name="age" value="">
+    <span class="error" id="nameErr"></span>
+    <br><br>
+    <p>Gender:</p>
+    <input type="radio" name="gender" value="female" oninput="updateGender()"> Female
+    <input type="radio" name="gender" value="male" oninput="updateGender()"> Male
+    <span class="error" id="genderErr"></span>
+    <br><br>
+    <label for="species">species:</label>
+    <select id="species" name="species" onchange="updateSpecies()">
+        <option value="Human">Human</option>
+        <option value="Elf">Elf</option>
+        <option value="Dwarf">Dwarf</option>
+        <option value="Orc">Orc</option>
+    </select>
+    <br>
+    <label for="profession">Profession:</label>
+    <select id="profession" name="profession" onchange="updateProf()">
+        <option value="Warrior">Warrior</option>
+        <option value="Mage">Mage</option>
+        <option value="Priest" id="prof">Priest</option>
+    </select>
+    <br><br>
+    <div class="slidecontainer">
+        <p>Basic Properties:</p>
+        <br>
+        <label for="atk">Attack:&nbsp;&nbsp;</label>
+        <label for="atk" id="atkmin">2</label>
+        <input type="range" min="2" max="10" value="5" class="slider" id="atk">
+        <label for="atk" id="atkmax">10</label>
+        <br>
+        <label for="def">Defense:</label>
+        <label for="def" id="defmin">2</label>
+        <input type="range" min="2" max="10" value="5" class="slider" id="def">
+        <label for="def" id="defmax">10</label>
+        <br>
+        <label for="mag">Magic:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <label for="mag" id="magmin">2</label>
+        <input type="range" min="2" max="10" value="5" class="slider" id="mag">
+        <label for="mag" id="magmax">10</label>
+        <br>
+        <label for="hel">Health:&nbsp;&nbsp;</label>
+        <label for="hel" id="helmin">2</label>
+        <input type="range" min="2" max="10" value="5" class="slider" id="hel">
+        <label for="hel" id="helmax">10</label>
+    </div>
+    <br><br>
+
+    <p>Description: </p><textarea name="comment" rows="2"></textarea>
+    <br>
+    <input type="checkbox" name="terms" value="no" oninput="updateTerms()"> I accept the terms and conditions.
+    <span class="error" id="termsErr"></span>
+    </form> 
+</article>
+<aside><p style="color: #a8a8a8;"><small>preview</small></p>
+    <p style="font-family: Impact, Haettenschweiler, sans-serif; font-weight: lighter;">Name: <span id="displayName"></span></p>
+    <div id="display"></div>
+    <div id="display2"></div>
+    <div style="color: #ffda73; font-family: 'Times New Roman', Times, serif;">
+    <p>ATK<img src="atk.svg" style="width: 24px; vertical-align: middle;"> <span id="atkval"></span></p>
+    <p>DEF<img src="def.svg" style="width: 24px; vertical-align: middle;"> <span id="defval"></span></p>
+    <p>MAG<img src="mag.svg" style="width: 24px; vertical-align: middle;"> <span id="magval"></span></p>
+    <p>HEL<img src="hel.svg" style="width: 24px; vertical-align: middle;"> <span id="helval"></span></p>
+    </div>
+</aside>
+    <script>
+        var atkslider = document.getElementById("atk");
+        var atkoutput = document.getElementById("atkval");
+        atkoutput.innerHTML = atkslider.value;
+        atkslider.oninput = function () {
+            atkoutput.innerHTML = this.value;
+        }
+        var defslider = document.getElementById("def");
+        var defoutput = document.getElementById("defval");
+        defoutput.innerHTML = defslider.value;
+        defslider.oninput = function () {
+            defoutput.innerHTML = this.value;
+        }
+        var magslider = document.getElementById("mag");
+        var magoutput = document.getElementById("magval");
+        magoutput.innerHTML = magslider.value;
+        magslider.oninput = function () {
+            magoutput.innerHTML = this.value;
+        }
+        var helslider = document.getElementById("hel");
+        var heloutput = document.getElementById("helval");
+        heloutput.innerHTML = helslider.value;
+        helslider.oninput = function () {
+            heloutput.innerHTML = this.value;
+        }
+    </script>
+</section>
+<footer><input type="submit" value="Submit" onclick="validateForm()"></footer>
+</body>
+</html>
