@@ -1,0 +1,369 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Shop</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+        }
+        header {
+            padding: 60px;
+            text-align: center;
+            background-image: url(goods.jpg);
+            background-size: cover;
+            background-position: center;
+            font-family: Microsoft Yahei;
+            color: white;
+        }
+        nav {
+            display: flex;
+            position: sticky;
+            background-color: #333;
+        }
+
+        nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .col{
+            flex-direction: column;
+        }
+
+        .fakeimg {
+            background-color: #aaa;
+            width: 100%;
+            padding: 20px;
+        }
+
+        footer {
+            padding: 20px;
+            text-align: center;
+            background: #333;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        @media screen and (max-width: 500px) {
+            .row {
+                flex-direction: column;
+            }
+        }
+        @media screen and (max-width: 400px) {
+            .navbar {
+                flex-direction: column;
+            }
+        }
+        .member {
+            background-image: url(head.jpg);
+            background-size: cover;
+            background-position: center;
+            position: fixed;
+            padding: 10px;
+            right: 20px;
+            bottom: 40px;
+            height: 100px;
+            width: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            font-size: 20px;
+            font-family: Microsoft JhengHei, Microsoft Yahei;
+            color: white;
+            transition: all ease 6s;
+        }
+        .member1 {
+            background-color: #e0e0e0;
+            position: fixed;
+            padding: 10px;
+            right: 19px;
+            bottom: 39px;
+            height: 102px;
+            width: 102px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            font-size: 20px;
+            font-family: Microsoft JhengHei, Microsoft Yahei;
+            color: white;
+            transition: all ease 6s;
+        }
+        .member:hover {
+            transform: rotate(360deg);
+        }
+        .divider {
+            text-align: center;
+            padding: 5px;
+            color: red;
+        }
+        .banners {
+            padding: 20px;
+            justify-content: center;
+            align-items: center;
+            color: #ece7e4;
+            flex-direction: column;
+        }
+        .banner {
+            background-color: #150c06;
+            padding: 0;
+            padding-bottom: 20px;
+            border-radius: 6px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-family: SimSun;
+            margin: 10px;
+        }
+        .banner img{
+            border-radius: 6px;
+        }
+        .item{
+            width: 90%;
+            border-radius: 10px;
+            box-shadow: 5px 5px 8px #888888;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+            transition: all ease 0.5s;
+        }
+        .item:hover{
+            transform: translateY(-5px);
+        }
+        .item img{
+            border-radius: 10px;
+        }
+        .banner h1{
+            color: #c6bd95;
+            padding: 20px;
+        }
+        .contentbox{
+            display: flex;
+            flex-direction: column;
+            border: 1px double #c6bd95;
+            border-radius: 4px;
+            margin: 0 20px 0 20px;
+            padding: 5px 0 5px 0;
+        }
+        .contentbox p{
+            margin: 2px;
+            font-family: STzhongsong;
+            font-weight: lighter;
+        }
+        .tag{
+            display: flex;
+            background-color: #d7bf9d;
+            color: #412911;
+            width: 80%;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 1px;
+            border: 1px dotted #584d3f;
+        }
+        .caption{
+            color: #d09a5f;
+            margin-bottom: 2px;
+            font-size: 30px;
+        }
+        .info{
+            padding: 8px;
+        }
+        .name{
+
+            margin: 0;
+        }
+        .price{
+            color: red;
+            font-weight: bold;
+            font-size: large;
+            margin: 2px;
+        }
+        .paid{
+            color: #aaa;
+            font-weight: normal;
+            font-size: small;
+        }
+    </style>
+    <script>
+        let navid=0;
+        function navUpdate(){
+            var elements = document.getElementById('nav').children;
+            document.getElementsByTagName("nav").backgroundColor = "#333";
+            document.getElementsByTagName("nav").color = "white";
+            elements.item(navid).backgroundColor="#ddd";
+            elements.item(navid).color = "black";
+            console.log(navid);
+        }
+        function navChange(id) {
+            navid=id;
+            navUpdate();
+        }
+    </script>
+</head>
+
+<body onload="navUpdate()">
+
+
+    <header>
+        <h1 style="font-weight: bolder;">咕嗞咕嗞</h1>
+        <p>巴别塔&#8482;公司优选。品质保障。</p>
+    </header>
+    <nav id="nav" class="navbar">
+        <a href="#">推荐</a>
+        <a href="#">宝贝</a>
+        <a href="#">分类</a>
+        <a href="#">新品</a>
+        <a href="#">作品</a>
+    </nav>
+    <div class="member1">
+        <p>会员中心</p>
+    </div>    
+    <div class="member">
+        <p>会员中心</p>
+    </div>
+
+    <div class="banners">
+        <div class="banner">
+            <img src="cover.jpg" width="100%" height="100%">
+            <h1>活动时间</h1>
+            <div class="contentbox" style="flex-direction:row; font-family:'Times New Roman', Times, serif; font-size: 150%;align-items: center;">
+                <div style="flex:10%;"><img src="star.png" width="100%"></div>
+                <div style="flex:80%;">
+                <p>04/05 <small>10:00</small>--04/21 <small>23:59</small></p>
+                </div>
+                <div style="flex:10%;"><img src="star.png" width="100%"></div>
+            </div>
+            <h1>活动内容</h1>
+            <div class="contentbox">
+                <div class="row" style="margin: 20px; margin-bottom: 5px; align-items: center;">
+                    <img src="mail.png" width="40%" height="40%">
+                    <div class="col" style="flex: 50%; text-align: left;padding-left: 5px;">
+                        <div class="tag">
+                        <h2>限时包邮</h2>
+                        </div>
+                        <p>活动期内，商品全场包邮</p>
+                        <p>(偏远地区、港澳台及海外地区除外)</p>
+                    </div>
+                </div>
+                <img src="line.png" width="100%" height="100%">
+                <div class="row" style="margin: 20px; margin-top: 5px; margin-bottom: 0; align-items: center;">
+                    
+                    <div class="col" style="flex: 50%; text-align: left;">
+                        <div class="tag">
+                            <h2>观剧纪念</h2>
+                        </div>
+                        <p>活动期内单笔实付满128元赠送</p>
+                        <p>特典-纸质观剧望远镜:眺往穹顶之下</p>
+                    </div>
+                    <img src="telescope.png" width="40%" height="40%">
+                </div>
+                <p><small>*积分商城加价购兑换不算进特典活动金额</small></p>
+                <p><small>*因选择不同支付方式导致订单拆分，属于不满足特典条件</small></p>
+                <br>
+            </div>
+            
+        </div>
+        <div class="banner" style="padding-top: 20px;">
+            <h1>新品展示</h1>
+            <div class="contentbox">
+                <div class="row" style="align-items: center;">
+                    <div style="flex: 60%;">
+                    <h2 class="caption">*明珠的背面*</h2>
+                    <h2 style="margin-top: 0;">木制立体剧场</h2>
+                    </div>
+                    <div style=" flex:30%; color: #d09a5f;">
+                    <p style="font-size: 40px; margin: 0; font-family: serif;">79</p><small style="margin: 0;">元/款</small>
+                    </div>
+
+                </div>
+                <img src="theatre.png" width="100%" height="100%" style="padding: 5px;">
+            </div>
+            <br>
+            <div class="contentbox" style="padding-top: 20px; padding-bottom: 20px;">
+                <div class="row" style="align-items: center; justify-content: center;">
+                    <div style="flex: 40%;">
+                        <img src="badge1.png" width="80%">
+                    </div>
+                    <div style="flex: 45%; padding-right: 10px;">
+                        <h2 class="caption" style="margin-top: 0;">*瞬时宣叙调*</h2>
+                        <h2 style="margin: 0;">角色徽章套组</h2>
+                    
+                    <div style="color: #d09a5f;">
+                        <p><span style="font-size: 40px; margin: 0; font-family: serif;">69</span><small>元/套</small></p>
+                        <p><small style="margin: 0;">尺寸：约58*58mm</small></p>
+                    </div>
+                    </div>
+                
+                </div>
+                <br>
+                <img src="badge2.png" width="100%" height="100%" style="padding: 5px;">
+            </div>
+            <br>
+        </div>
+    </div>
+    <div class="divider">
+        <p>< · · 全部宝贝 · · ></p>
+    </div>
+    <div class="row" style="padding: 10px; align-items: center; justify-content: center;">
+        <div class="col" style="flex:50%;">
+            <div class="item">
+                <img src="1.jpg" width="100%" height="100%">
+                <div class="info">
+                <h4 class="name">*多彩熊生* 小熊软糖/*棒棒人生* 苦目棒棒糖 套装</h4>
+                <p class="price">¥39 <small class="paid">1万+人付款</small></p>
+                </div>
+            </div>
+            <div class="item">
+                <img src="3.jpg" width="100%" height="100%">
+                <div class="info">
+                    <h4 class="name">*时代的记录* 调查员档案袋</h4>
+                    <p class="price">¥69 <small class="paid">1万+人付款</small></p>
+                </div>
+            </div>
+        </div>
+        <div class="col" style="flex:50%;">
+            <div class="item">
+                <img src="2.jpg" width="100%" height="100%">
+                <div class="info">
+                    <h4 class="name">*今夜星光灿烂* CG明信片套组</h4>
+                    <p class="price">¥35 <small class="paid">2万+人付款</small></p>
+                </div>
+            </div>
+            <div class="item">
+                <img src="4.jpg" width="100%" height="100%">
+                <div class="info">
+                    <h4 class="name">*首席登场*双闪亚克力色纸</h4>
+                    <p class="price">¥35 <small class="paid">1万+人付款</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>2024 &copy;BLUEPOCH</p>
+    </footer>
+
+</body>
+
+</html>
