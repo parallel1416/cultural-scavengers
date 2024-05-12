@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+	<meta charset='UTF-8'>
+	<title>Document</title>
+</head>
+
+<body style="margin: 10%;">
+	姓名<input class='name'>
+	留言<input class='message'>
+	<br><br>
+	<button class='submit'>加入</button>
+	<ul class='messageList'></ul>
+
+	<script>
+		(function () {
+			const msgs = []; //使用Map数据结构
+			const $ = sel => document.querySelector(sel); //选择器封装
+
+			//提交信息
+			function handleClick() {
+				const name=$('.name').value;
+				const msg=$('.message').value;
+				if (!name || !msg) return;
+				msgs.push([name, msg]);
+				listShow();
+				for (let i = 0; i < [$('.name'), $('.message')].length; i++) {
+					[$('.name'), $('.message')][i].value = '';
+				}
+			}
+
+			$('.submit').addEventListener("click", handleClick);
+
+
+			//展示信息
+			const listShow = () => {
+				let items = [];
+				for (let i=0;i<msgs.length;i++) {
+					const [k, v] = msgs[i];
+					items.push(`<li class="list-group-item">
+				${k}<span>说: </span>${v} 
+				</li>`); //模板字符串
+				}
+				$('.messageList').innerHTML = items.join('');
+			}
+		})();
+
+	</script>
+</body>
+
+</html>

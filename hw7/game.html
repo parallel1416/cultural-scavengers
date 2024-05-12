@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{
+            margin: 10%;
+        }
+        canvas {
+            border: 1px solid #d3d3d3;
+            background-color: #f1f1f1;
+        }
+    </style>
+
+</head>
+
+<body onload="startGame()">
+    <script>
+        let highScore = 0;
+        let myGamePiece;
+        let myObstacles = [];
+        let myScore;
+        let ctx;
+
+        function startGame() {
+            myGamePiece = new Component({width:30, height:30, color:"red", x:10, y:120});
+            myGamePiece.gravity = 0.05;
+            myScore = new TextComponent({width:"30px", height:"Consolas", color:"black", x:280, y:40});
+            myGameArea.start();
+            myObstacles=[]
+        }
+
+        let myGameArea = {
+            canvas: document.createElement("canvas"),
+            start() {
+                this.canvas.width = 480;
+                this.canvas.height = 270;
+                this.context = this.canvas.getContext("2d");
+                document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+                this.frameNo = 0;
+                clearInterval(this.interval);//此处在每次开始新游戏时重新设置interval
+                this.interval = setInterval(updateGameArea, 20);
+            },
+            clear() {
+                this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            }
+        }
+        class Component{
+            constructor(options){
+                this.score = 0;
+                this.width = options.width;
+                this.height = options.height;
+                this.speedX = 0;
+                this.speedY = 0;
+                this.x = options.x;
+                this.y = options.y;
+                this.gravity = 0;
+                this.gravitySpeed = 0;
+                this.color=options.color;
+            }
+            update(){
+                ctx = myGameArea.context;
+                ctx.fillStyle = this.color;
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+            }
+            newPos(){
+                this.gravitySpeed += this.gravity;
+                this.x += this.speedX;
+                this.y += this.speedY + this.gravitySpeed;
+                this.hitBottom();
+                this.hitTop();
+            }
+            hitBottom(){
+                let rockbottom = myGameArea.canvas.height - this.height;
+                if (this.y > rockbottom) {
+                    this.y = rockbottom;
+                    this.gravitySpeed = 0;
+                }
+            }
+            hitTop(){ //此处增加了碰撞顶部的约束
+                if (this.y < 0) {
+                    this.y = 0;
+                    this.gravitySpeed = 0;
+                }
+            }
+            crashWith(otherobj){
+                let myleft = this.x;
+                let myright = this.x + (this.width);
+                let mytop = this.y;
+                let mybottom = this.y + (this.height);
+                let otherleft = otherobj.x;
+                let otherright = otherobj.x + (otherobj.width);
+                let othertop = otherobj.y;
+                let otherbottom = otherobj.y + (otherobj.height);
+                let crash = true;
+                if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+                    crash = false;
+                }
+                return crash;
+            }
+        }
+        class TextComponent extends Component{
+            constructor(options){
+                super(options);
+                this.font=options.font;
+                this.text=options.text;
+            }
+            update(){
+                ctx.font = this.width + " " + this.height;
+                ctx.fillStyle = this.color;
+                ctx.fillText(this.text, this.x, this.y);
+            }
+        }
+
+        function updateGameArea() {
+            let x, height, gap, minHeight, maxHeight, minGap, maxGap;
+            for (i = 0; i < myObstacles.length; i += 1) {
+                if (myGamePiece.crashWith(myObstacles[i])) {
+                    highScore = Math.max(highScore, myGameArea.frameNo);//此处更新最佳分数
+                    document.getElementById("highScore").innerHTML = highScore;
+                    return;
+                }
+            }
+            myGameArea.clear();
+            myGameArea.frameNo += 1;
+            if (myGameArea.frameNo == 1 || everyinterval(150)) {
+                x = myGameArea.canvas.width;
+                minHeight = 20;
+                maxHeight = 200;
+                height = Math.floor(Math.random() * (maxHeight - minHeight + 1) + minHeight);
+                minGap = 80;
+                maxGap = 200;
+                gap = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
+                myObstacles.push(new Component({width:10, height:height, color:"green", x:x, y:0}));
+                myObstacles.push(new Component({ width: 10, height: x - height - gap, color: "green", x:x, y:height + gap}));
+            }
+            for (i = 0; i < myObstacles.length; i += 1) {
+                myObstacles[i].x += -1;
+                myObstacles[i].update();
+            }
+            myScore.text = "SCORE: " + myGameArea.frameNo;
+            console.log("a");
+            myScore.update();
+            console.log("b");
+            myGamePiece.newPos();
+            console.log("c");
+            myGamePiece.update();
+            console.log("d");
+        }
+
+        function everyinterval(n) {
+            return myGameArea.frameNo % n === 0;//此处简化函数
+        }
+
+        function accelerate(n) {
+            myGamePiece.gravity = n;
+        }
+        
+
+
+    </script>
+    <br><br>
+    <button onmousedown="accelerate(-0.2)" onmouseup="accelerate(0.05)">ACCELERATE</button>
+    <button onclick="startGame()">RESTART</button>
+    <!--此处增加重新开始游戏的功能和统计最高分数的功能-->
+    <p>Use the ACCELERATE button to stay in the air.</p>
+    <p>How long can you stay alive?</p>
+    <p>High Score: <span id="highScore">0</span></p>
+</body>
+
+</html>
